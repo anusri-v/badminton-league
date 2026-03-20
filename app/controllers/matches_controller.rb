@@ -7,6 +7,10 @@ class MatchesController < ApplicationController
 
     render json: { success: false, message: 'Player 2 is not valid' } and return if @player2.nil?
 
+    if params[:player_1_id] == params[:player_2_id]
+      render json: { success: false, message: 'Player 1 and Player 2 cannot be the same' } and return
+    end
+
     unless [params[:player_1_id], params[:player_2_id]].include?(params[:winner_id])
       render json: { success: false, message: 'Winner should be either player 1 or player 2' } and return
     end

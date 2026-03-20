@@ -25,6 +25,16 @@ RSpec.describe 'Matches API', type: :request do
         expect(json_response['match']).to be_nil
       end
 
+      it 'Should fail when player 1 and player 2 are the same' do
+        player1 = create(:player, name: 'Player 1')
+        post '/matches', params: { player_1_id: player1.id, player_2_id: player1.id, winner_id: player1.id }
+
+        json_response = JSON.parse(response.body)
+        expect(json_response['success']).to eq false
+        expect(json_response['message']).to include('Player 1 and Player 2 cannot be the same')
+        expect(json_response['match']).to be_nil
+      end
+
       it 'Should fail when winner ID is invalid' do
         player1 = create(:player, name: 'Player 1')
         player2 = create(:player, name: 'Player 2')
