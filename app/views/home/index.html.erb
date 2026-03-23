@@ -1,0 +1,9 @@
+<div class="home-container">
+  <h1>Badminton League</h1>
+  <div class="home-buttons">
+    <%= link_to "View Players", players_path, class: "btn" %>
+    <%= link_to "Add Player", new_player_path, class: "btn" %>
+    <%= link_to "Leaderboard", players_path(leaderboard: true), class: "btn" %>
+    <%= link_to "Record Match", new_match_path, class: "btn" %>
+  </div>
+</div>
