@@ -1,0 +1,42 @@
+<div class="page-container">
+  <div class="page-header">
+    <%= link_to "← Back", root_path, class: "back-link" %>
+    <br /><br />
+    <h1>Players</h1>
+  </div>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Gender</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @players.empty? %>
+        <tr><td colspan="4" class="empty">No players found.</td></tr>
+      <% else %>
+        <% @players.each do |player| %>
+          <tr>
+            <td><%= player.name %></td>
+            <td><%= player.email %></td>
+            <td><%= player.phone %></td>
+            <td><%= player.gender %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="pagination">
+    <% if @page > 1 %>
+      <%= link_to "← Prev", players_path(page: @page - 1, per_page: @per_page), class: "page-btn" %>
+    <% end %>
+    <span>Page <%= @page %> of <%= [(@count.to_f / @per_page).ceil, 1].max %></span>
+    <% if @page * @per_page < @count %>
+      <%= link_to "Next →", players_path(page: @page + 1, per_page: @per_page), class: "page-btn" %>
+    <% end %>
+  </div>
+</div>

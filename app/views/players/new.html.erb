@@ -1,0 +1,35 @@
+<div class="page-container">
+  <div class="page-header">
+    <%= link_to "← Back", root_path, class: "back-link" %>
+    <br /><br />
+    <h1>Add Player</h1>
+  </div>
+
+  <% if @player.errors.any? %>
+    <div class="form-errors">
+      <% @player.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= form_with url: players_path, method: :post, class: "player-form" do |f| %>
+    <div class="form-group">
+      <label>Name</label>
+      <%= f.text_field :name, value: @player.name, placeholder: "Enter name" %>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <%= f.email_field :email, value: @player.email, placeholder: "Enter email" %>
+    </div>
+    <div class="form-group">
+      <label>Phone</label>
+      <%= f.text_field :phone, value: @player.phone, placeholder: "10-digit phone number" %>
+    </div>
+    <div class="form-group">
+      <label>Gender</label>
+      <%= f.select :gender, [["Male", "male"], ["Female", "female"], ["Other", "other"]], { include_blank: "Select gender" } %>
+    </div>
+    <%= f.submit "Add Player", class: "btn" %>
+  <% end %>
+</div>
