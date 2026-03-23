@@ -31,10 +31,14 @@ class PlayersController < ApplicationController
     render json: { success: false, message: 'Player ID cannot be blank' } and return unless params[:id].present?
 
     @player = Player.find_by(id: params[:id])
-    if @player.destroy
-      render json: { success: true, message: 'Player deleted successfully' }
-    else
-      render json: { success: false, message: "Error in deleting player: #{@player.errors.full_messages}" }
+    respond_to do |format|
+      if @player.destroy
+        format.html { redirect_to players_path, notice: 'Player deleted successfully' }
+        format.json { render json: { success: true, message: 'Player deleted successfully' } }
+      else
+        format.html { redirect_to players_path, alert: 'Error deleting player' }
+        format.json { render json: { success: false, message: "Error in deleting player: #{@player.errors.full_messages}" } }
+      end
     end
   end
 
@@ -52,7 +56,8 @@ class PlayersController < ApplicationController
     offset = (@page - 1) * @per_page
 
     if params[:leaderboard]
-      @players = @players.joins('LEFT JOIN matches ON matches.winner_id = players.id')
+      @players = @players.reorder(nil)
+                         .joins('LEFT JOIN matches ON matches.winner_id = players.id')
                          .select('players.*, COUNT(matches.winner_id) AS win_count')
                          .group('players.id')
                          .order('win_count DESC')

@@ -132,6 +132,19 @@ body {
   font-size: 0.95rem;
 }
 
+.delete-btn {
+  background: none;
+  border: none;
+  color: #e03131;
+  cursor: pointer;
+  font-size: 0.9rem;
+  padding: 0;
+}
+
+.delete-btn:hover {
+  text-decoration: underline;
+}
+
 .form-errors {
   background: #ffe5e5;
   border: 1px solid #f5c2c2;

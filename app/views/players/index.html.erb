@@ -12,11 +12,12 @@
         <th>Email</th>
         <th>Phone</th>
         <th>Gender</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
       <% if @players.empty? %>
-        <tr><td colspan="4" class="empty">No players found.</td></tr>
+        <tr><td colspan="5" class="empty">No players found.</td></tr>
       <% else %>
         <% @players.each do |player| %>
           <tr>
@@ -24,6 +25,7 @@
             <td><%= player.email %></td>
             <td><%= player.phone %></td>
             <td><%= player.gender %></td>
+            <td><%= button_to "Delete", player_path(player), method: :delete, class: "delete-btn", data: { turbo_confirm: "Delete #{player.name}?" } %></td>
           </tr>
         <% end %>
       <% end %>
