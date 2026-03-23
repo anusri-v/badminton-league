@@ -1,24 +1,14 @@
-# README
+# Badminton League Tracker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Technical Prerequisites
+- Ruby 2.7.3                                        
+- PostgreSQL
+  
+### Steps to run the tracker in local
+1. Clone the repository and navigate into the repo
+2. Install dependencies using: `bundle install`
+3. Create the database and run migrations using: `rails db:create db:migrate`
+4. Start the server using: `rails server`
+5. Open http://localhost:3000
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+If the db connection is failing: update the username and password in the database.yml file
